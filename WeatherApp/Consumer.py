@@ -1,26 +1,35 @@
 from confluent_kafka import Consumer
 import json
+import pymongo
+import datetime
+
+# Connexion à la base de données
+client = pymongo.MongoClient("mongodb://mongodb:27017/")
+db = client["mydatabase"]
+print('Subscribed to database')
+collection = db["recherche"]
 
 # Créer un consommateur Kafka qui écoute le sujet "weather"
-print("Je m'execute")
 c=Consumer({'bootstrap.servers':'broker:29092','group.id':'python-consumer'})
-print("Je me suis connecté au broker")
-c.subscribe(['weather'])
+c.subscribe(['weather2'])
+print('Subscribed to topic')
+
+print('ça va les connexions')
 
 # Boucler sur les messages reçus
-
-
-def main():
-    while True:
+while True:
+    try:
         msg=c.poll(1.0) #timeout
-#msg = c.consume(num_messages=1, timeout=1.0)
         if msg is None:
+            print('No message')
             continue
         if msg.error():
             print('Error: {}'.format(msg.error()))
             continue
-        data = msg.value()
+        data = json.loads(msg.value())
+        data['date'] = datetime.datetime.now()
+        collection.insert_one(data)
         print(data)
-        c.close()
-if __name__ == '__main__':
-    main()
+    except Exception as e:
+        print('Error: {}'.format(str(e)))
+        continue
