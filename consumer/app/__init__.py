@@ -10,8 +10,8 @@ from kafka import KafkaConsumer
 def main():
     try:
         # To consume latest messages and auto-commit offsets
-        client = pymongo.MongoClient("mongodb://root:example@mongo:27017/")
-        db = client["mydatabase"]
+        # client = pymongo.MongoClient("mongodb://root:example@mongo:27017/")
+        # db = client["mydatabase"]
         consumer = KafkaConsumer(
             EnvVariables.KAFKA_TOPIC_NAME.get_env(),
             bootstrap_servers=f'{EnvVariables.KAFKA_SERVER.get_env()}:{EnvVariables.KAFKA_PORT.get_env()}',
@@ -23,8 +23,8 @@ def main():
             print("%s:%d:%d: key=%s value=%s" % (message.topic, message.partition,
                                                  message.offset, message.key, message.value))
             data = loads(message.value())
-            result = db["recherche"].insert_one(data)
-            print(result)
+            # result = db["recherche"].insert_one(data)
+            # print(result)
 
     except Exception as e:
         logging.info('Connection successful', e)
