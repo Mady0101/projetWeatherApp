@@ -22,13 +22,9 @@ def main():
             enable_auto_commit=True,
         )
         for message in consumer:
-            # print("%s:%d:%d: key=%s value=%s" % (message.topic, message.partition,
-            #                                      message.offset, message.key, message.value))
-            print("message")
-            print(message.value)
-            
-            result = db["cities"].insert_one(message.value)
-            print(result)
+            print("%s:%d:%d: key=%s value=%s" % (message.topic, message.partition,
+                                                 message.offset, message.key, message.value))
+            db["cities"].insert_one(message.value)
 
     except Exception as e:
         logging.info('Connection successful', e)
