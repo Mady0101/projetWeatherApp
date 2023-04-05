@@ -75,7 +75,7 @@ h1,h3{
 
 .panel{
     position: absolute;
-    width: 40%;
+    width: 25%;
     height: 100%;
     top: 0;
     right: 0;
@@ -83,7 +83,7 @@ h1,h3{
     box-shadow: 0 8px 32px 0 rgba(0,0,0,0.3);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.18);
+    border: 1px solid rgba(110,110,110,0.18);
     z-index: 1;
     padding: 3em 2em;
     overflow-y: scroll;
@@ -97,15 +97,15 @@ h1,h3{
     position: absolute;
     top:0;
     right: 0;
-    padding: 1.5em;
-    margin: 0;
     border: none;
     outline: none;
-    background: #fa6d1b;
+    background: #FFB347;;
     color: #fff;
     cursor: pointer;
     font-size: 1.2em;
     transition: 0.4s;
+    margin-right : 23%;
+    margin-top: 35px;
 }
 
 .submit:hover {
@@ -121,6 +121,7 @@ h1,h3{
     width: 80%;
     color: #fff;
     font-size: 1.1em;
+    margin-right: -120%;
 }
 
 .search:focus{
@@ -164,4 +165,54 @@ h1,h3{
 .favori {
 
 display : flex;
+}
+
+.tableau {
+    height : 100%;
+    width : 80%;
+    margin-top : 90px
+  
+}
+
+.tableau tr td {
+    background: rgba(255,255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.18);
+    z-index: 1;
+    
+
+    
+}
+
+.tableau tr td button {
+
+    margin-left : 40%;
+    background: #FFB347;
+    border: 0px solid rgba(255,255,255,0.18);
+
+}
+
+.imp {
+
+    margin : -40px;
+    height: 70px;
+
+}
+
+.im {
+
+    background: #FFB347;
+    
+
+}
+
+.rech {
+    margin-left: 20%;
+
+}
+
+.d{
+    display : flex;
 }
