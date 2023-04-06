@@ -42,6 +42,10 @@ app.secret_key = 'secretweather'
 def home():
     return render_template("index.html")
 
+@app.route('/favori')
+def favori():
+    return render_template('favori.html')
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
