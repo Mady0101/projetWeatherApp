@@ -19,15 +19,25 @@
 </head>
 <body>
    
-    <div class="weather-app {{city['weather']}}">
+    <div class="weather-app {{city['temps']}}">
         <div class="container">
-            <div style="display : flex ">
-                <i class="icon-user" style="height:25px ; margin-right:20px"></i>
-                <span style="padding-bottom: 10px;"><a href="{{ url_for('home_blueprint.profile') }}">Welcome {{user['username']}}</a></span>
-            </div>
+            <div>
+                {% if user %}
+                    <div style="display : flex ">
+                        <i class="icon-user" style="height:25px ; margin-right:20px"></i>
+                        <span style="padding-bottom: 10px;"><a href="{{ url_for('home_blueprint.profile') }}">Welcome {{user['username']}}</a></span>
+                    </div>
+                    <button> logout </button>
+                {% else %}
+                    <button> <a href="{{url_for('authentication_blueprint.login')}}" class="text-decoration: none !important;" > SignIn</a> </button>
+                    <button > <a href="{{url_for('authentication_blueprint.signup')}}" class="text-decoration: none !important;" > SignUp</a></button>
+                {% endif %}
+                
+            </div>  
+
             
             <div class="favori">
-            <button onclick="window.location.href='home/favori'">Favoris</button>
+            <button ><a href="{{ url_for('home_blueprint.favori') }}" style="">favori</a></button>
             <h3 class="brand"> the weather</h3>
             </div>
             <div>
@@ -43,13 +53,29 @@
                     </small>
                 </div>
                 <div class="weather">
-                    <img src="../static/assets/icons/weather/64x64/day/113.png"
-                        class="icons"
-                        alt="icon"
-                        width="50"
-                        height="50"
+                    {% if 'cloud' in city.temps %}
+                        <img src="../static/assets/icons/weather/64x64/day/119.png"
+                            class="icons"
+                            alt="icon"
+                            width="50"
+                            height="50"
                         />
-                    <span class="condition">{{city['weather']['name']}}</span>
+                    {% elif 'clear' in city.temps %}
+                        <img src="../static/assets/icons/weather/64x64/day/113.png"
+                            class="icons"
+                            alt="icon"
+                            width="50"
+                            height="50"
+                        />
+                    {% else %}
+                        <img src="../static/assets/icons/weather/64x64/day/176.png"
+                            class="icons"
+                            alt="icon"
+                            width="50"
+                            height="50"
+                        />
+                    {% endif %}
+                    <span class="condition">{{city.temps}}</span>
                 </div>
             </div>
         </div>
@@ -75,16 +101,16 @@
             <ul class="details">
                 <h4>Weather Details</h4>
                 <li>
-                    <span>{{city['weather']['name']}}</span>
-                    <span class="cloud">{{city['weather']['value']}}</span>
+                    <span>{{city.temps}}</span>
+                    <span class="cloud">{{city['atmosphericPressure']}} hPa</span>
                 </li>
                 <li>
                     <span>Humidity</span>
-                    <span class="humidity">{{city['humidity']}}</span>
+                    <span class="humidity">{{city['humidity']}} %</span>
                 </li>
                 <li>
                     <span>Wind</span>
-                    <span class="wind">{{city['wind']}}</span>
+                    <span class="wind">{{city['wind']}} m/s</span>
                 </li>
             </ul>
         </div>

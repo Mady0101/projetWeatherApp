@@ -31,24 +31,19 @@ print(app.url_map)
 
 
 
-users = []
-users.append(User(id=1, username='admin', password='admin',email=''))
-'''
-users.append(User(id=1, username='wassim', password='8888'))
-users.append(User(id=3, username='sarra', password='1234'))
-users.append(User(id=2, username='mahdi', password='0000'))
-'''
 
 
 
 
 
-
+@app.route('/historique')
+def hist():
+    return render_template("historique.html")
 
 
 @app.route("/")
 def index():
-    return redirect(url_for('authentication_blueprint.login'))
+    return redirect(url_for('home_blueprint.home'))
 
 # @app.route('/<string:cityname>')
 # def displayCityDetail(cityname):

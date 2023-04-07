@@ -12,10 +12,14 @@ home_blueprint = Blueprint('home_blueprint', __name__)
 
 @home_blueprint.route('/')
 def home():
-    user = request.args['user']
+    # user = request.args['user']
+    
     current_date = datetime.date.today()
     usertest = User(15,"mahdi","aze","aze@mail.com")
-    return render_template("index.html" ,user=usertest, cities=[],date =current_date.strftime("%d/%m/%Y") , city = City(1,"ariana",Weather("cloudy",89),15,"13:05",15,12,12))
+    usertest = None
+    city = City(1,"ariana","cloudy",15,"13:05",15,12,12)
+    
+    return render_template("index.html" ,user=usertest, cities=[],date =current_date.strftime("%d/%m/%Y") , city = City(1,"ariana","cloudy",15,"13:05",15,12,12))
 
 @home_blueprint.route('/profile')
 def profile():
