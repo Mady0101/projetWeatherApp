@@ -5,6 +5,9 @@ from flask_app.models.user import User
 
 from flask_app.models.city import City
 from flask_app.models.city import Weather
+from flask_app.main import db
+from flask_app.main import loc
+from flask_app.main import recherche
 
 import datetime
 
@@ -12,6 +15,23 @@ home_blueprint = Blueprint('home_blueprint', __name__)
 
 @home_blueprint.route('/')
 def home():
+    cities = db.capitales.find()
+    geol = loc.find_one()
+    if request.method == 'POST':
+        ville_nom = request.form['city']
+        capitale = collection.find_one({"nom": ville_nom})
+        if capitale:
+            ville_id = capitale["_id"]
+        else:
+            print("Capitale introuvable dans la base de données")
+ 
+        db.choix.insert_one({'capitale_id': ville_id, 'capitale': ville_nom, 'traite': 0})
+        time.sleep(4)
+        weather_data = recherche.find_one(sort=[('date', -1)])
+        return render_template('weather.html',cities=cities, weather_data=weather_data)
+        #return render_template("resultat.html", ville=ville_nom)
+    return render_template("index.html", cities=cities,weather_data=geol)
+
     # user = request.args['user']
     
     current_date = datetime.date.today()
