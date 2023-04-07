@@ -15,7 +15,7 @@ h1{
 
 .weather-app{
     min-height: 100vh;
-    background-image: url("./assets/images/backgrounds/aditya-vyas-PzhmEp_aDU4-unsplash.jpg");
+    background-image: url("./assets/images/backgrounds/cloudy.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -64,6 +64,13 @@ h1{
     
     
     
+}
+.cloudy{
+    background-image: url("./assets/images/backgrounds/cloudy.jpg");
+}
+
+.sunny{
+    background-image: url("./assets/images/backgrounds/sunny.jpg");
 }
 
 .weather_day{

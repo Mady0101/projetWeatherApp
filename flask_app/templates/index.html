@@ -21,25 +21,34 @@
    
     <div class="weather-app {{city['temps']}}">
         <div class="container">
-            <div>
-                {% if user %}
+             
+
+          
+            <nav >
+                <ul class="menu">
+                  <li><div class="favori">
+                    <button class="button-lien" ><a href="{{ url_for('home_blueprint.favori') }}" style="">Favorite</a></button>
+                    </div></li>
+                  <li><div class="historic">
+                    <button class="button-lien" ><a href="{{ url_for('home_blueprint.historic') }}" >Historic</a></button>
+                       
+                     </div></li>
+                     <li>   {% if user %}
                     <div style="display : flex ">
                         <i class="icon-user" style="height:25px ; margin-right:20px"></i>
                         <span style="padding-bottom: 10px;"><a href="{{ url_for('home_blueprint.profile') }}">Welcome {{user['username']}}</a></span>
                     </div>
-                    <button> logout </button>
+                    <button> logout </button></li>
+                    <li>
                 {% else %}
-                    <button> <a href="{{url_for('authentication_blueprint.login')}}" class="text-decoration: none !important;" > SignIn</a> </button>
-                    <button > <a href="{{url_for('authentication_blueprint.signup')}}" class="text-decoration: none !important;" > SignUp</a></button>
+                    <button class="button-lien"> <a href="{{url_for('authentication_blueprint.login')}}" class="text-decoration: none !important;" > SignIn</a> </button>
+                    <button  class="button-lien"> <a href="{{url_for('authentication_blueprint.signup')}}" class="text-decoration: none !important;" > SignUp</a></button>
                 {% endif %}
-                
-            </div>  
-
+                 </li>
+                </ul>
+              </nav>
             
-            <div class="favori">
-            <button ><a href="{{ url_for('home_blueprint.favori') }}" style="">favori</a></button>
-            <h3 class="brand"> the weather</h3>
-            </div>
+            
             <div>
                 <h1 class="temp">{{city['temperature']}}&#176</h1>
                 <div class="city-time">
@@ -76,7 +85,22 @@
                         />
                     {% endif %}
                     <span class="condition">{{city.temps}}</span>
+              
                 </div>
+                <div >
+                       <button class="image-button">
+                        <img src="../static/assets/icons/heart.png" alt="Nom de l'image"  class="icons"
+                        alt="icon"
+                        width="40"
+                        height="40">
+                      </button>
+                       <div class="city-time" >
+                       <small>
+                        <span class="">Add to favorite</span>
+                    
+                    </small>
+                </div>
+                 </div>
             </div>
         </div>
         <div class="panel">

@@ -5,12 +5,15 @@ from flask_app.models.user import User
 
 from flask_app.models.city import City
 from flask_app.models.city import Weather
-from flask_app.main import db
-from flask_app.main import loc
-from flask_app.main import recherche
-from flask_app.main import collection
 import datetime
 import time
+from pymongo import MongoClient
+
+client = MongoClient("mongodb://localhost:27017/")
+db = client["mydatabase"]
+collection = db["capitales"]
+recherche = db["recherche"]
+loc=db["localisation"]
 
 home_blueprint = Blueprint('home_blueprint', __name__)
 
@@ -70,3 +73,6 @@ def profile():
 @home_blueprint.route('/favori')
 def favori():
     return render_template('favori.html')
+@home_blueprint.route('/historic')
+def historic():
+    return render_template('historique.html')
