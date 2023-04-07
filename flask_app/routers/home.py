@@ -28,10 +28,18 @@ def home():
  
         db.choix.insert_one({'capitale_id': ville_id, 'capitale': ville_nom, 'traite': 0})
         time.sleep(4)
-        weather_data = recherche.find_one(sort=[('date', -1)])
-        return render_template('weather.html',cities=cities, weather_data=weather_data)
+        weather_data_db = recherche.find_one(sort=[('date', -1)])
+        weather_data = City(None,
+                            weather_data_db.ville,
+                            weather_data_db.temps ,
+                            weather_data_db.vent ,
+                            "date",
+                            weather_data_db.temperature,
+                            weather_data_db.humidite ,
+                            weather_data_db.pression_atmospherique)
+        return render_template('index.html',cities=cities, city=weather_data)
         #return render_template("resultat.html", ville=ville_nom)
-    return render_template("index.html", cities=cities,weather_data=geol)
+    
 
     # user = request.args['user']
     
