@@ -8,8 +8,9 @@ from flask_app.models.city import Weather
 from flask_app.main import db
 from flask_app.main import loc
 from flask_app.main import recherche
-
+from flask_app.main import collection
 import datetime
+import time
 
 home_blueprint = Blueprint('home_blueprint', __name__)
 
