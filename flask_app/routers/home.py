@@ -5,18 +5,22 @@ from flask_app.models.user import User
 
 from flask_app.models.city import City
 from flask_app.models.city import Weather
-from flask_app.main import db
-from flask_app.main import loc
-from flask_app.main import recherche
-from flask_app.main import collection
+from pymongo import MongoClient
 import datetime
 import time
+
+client = MongoClient("mongodb://localhost:27017/")
+db = client["mydatabase"]
+collection = db["capitales"]
+recherche = db["recherche"]
+loc=db["localisation"]
 
 home_blueprint = Blueprint('home_blueprint', __name__)
 
 @home_blueprint.route('/')
 def home():
     cities = db.capitales.find()
+    print(cities)
     geol = loc.find_one()
     if request.method == 'POST':
         ville_nom = request.form['city']
@@ -48,7 +52,7 @@ def home():
     usertest = None
     city = City(1,"ariana","cloudy",15,"13:05",15,12,12)
     
-    return render_template("index.html" ,user=usertest, cities=[],date =current_date.strftime("%d/%m/%Y") , city = City(1,"ariana","cloudy",15,"13:05",15,12,12))
+    return render_template("index.html" ,user=usertest, cities=cities,date =current_date.strftime("%d/%m/%Y") , city = City(1,"ariana","cloudy",15,"13:05",15,12,12))
 
 @home_blueprint.route('/profile')
 def profile():
