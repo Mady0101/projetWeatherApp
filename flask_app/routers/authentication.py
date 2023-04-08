@@ -45,6 +45,7 @@ def signup():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        confirm_password = request.form['confirm_password']
         email = request.form['email']
 
         if not username or not password:
@@ -56,6 +57,10 @@ def signup():
         print(exist)
         if exist:
             flash('username exist')
+            return redirect(url_for('.signup'))
+        
+        if not confirm_password == password:
+            flash('the two passwords are no the same')
             return redirect(url_for('.signup'))
         
         collection.insert_one({"username": username, 'password': password, 'email': email})
