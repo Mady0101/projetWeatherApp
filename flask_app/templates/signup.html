@@ -6,16 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sign Up</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 
 <body>
-  <section class="hero is-info is-fullheight">
+  <section class="hero is-info is-fullheight sunny login">
     <div class="hero-body">
       <div class="container">
         <div class="columns is-centered">
           <div class="column is-half">
-            <form method="POST">
+            <form action="{{ url_for('authentication_blueprint.signup') }}" method="POST">
               <div class="field">
                 {% with messages = get_flashed_messages() %}
                 {% if messages %}
@@ -30,7 +31,7 @@
                 {% endwith %}
                 <label class="label">Username</label>
                 <div class="control has-icons-left has-icons-right">
-                  <input class="input" type="text" name="username" placeholder="Username">
+                  <input style="width: 1000px;" class="input" type="text" name="username" placeholder="Username">
                   <span class="icon is-small is-left">
                     <i class="fas fa-user"></i>
                   </span>
@@ -39,7 +40,7 @@
               <div class="field">
                 <label class="label">Email</label>
                 <div class="control has-icons-left has-icons-right">
-                  <input class="input" type="email" name="email" placeholder="Email">
+                  <input style="width: 1000px;" class="input" type="email" name="email" placeholder="Email">
                   <span class="icon is-small is-left">
                     <i class="fas fa-envelope"></i>
                   </span>
@@ -48,7 +49,7 @@
               <div class="field">
                 <label class="label">Password</label>
                 <p class="control has-icons-left">
-                  <input class="input" type="password" name="password" placeholder="Password">
+                  <input style="width: 1000px;" class="input" type="password" name="password" placeholder="Password">
                   <span class="icon is-small is-left">
                     <i class="fas fa-lock"></i>
                   </span>
@@ -57,7 +58,7 @@
               <div class="field">
                 <label class="label">Confirm Password</label>
                 <p class="control has-icons-left">
-                  <input class="input" type="password" name="confirm_password" placeholder="Confirm Password">
+                  <input style="width: 1000px;" class="input" type="password" name="confirm_password" placeholder="Confirm Password">
                   <span class="icon is-small is-left">
                     <i class="fas fa-lock"></i>
                   </span>

@@ -15,7 +15,7 @@
 <body>
    
     <div class="weather-app">
-            <h1 class="brand">Historic </h1>
+            <h1 class="brand">Previsions</h1>
             <div class="weather-app-container">
             <nav >
                 <ul class="menu">
@@ -42,14 +42,12 @@
                  <li>
                     
                     <div class="search-bar"> 
-
-                        <form id="locationInput" method="POST" action="{{ url_for('home_blueprint.historic') }}">
-                            <input type="text" class="search" name="city" placeholder="Search location ..."/>
-                            <button type="submit" class="submit">Search 
-                                
-                            </button>
-                        </form>
-
+                    <form id="locationInput">
+                        <input type="text" class="search" placeholder="Search location ..."/>
+                        <button type="submit" class="submit">Rechercher 
+                            
+                        </button>
+                    </form>
                     </div>     
                       
                  </li>
@@ -60,15 +58,23 @@
           
                 
                 <div class="weather_historic">
-                    {% for city in cities %}
-                    <article class="weather_historic_item">
-                        <h3 class="weather_day">{{ city.currentTime }} </h3>
-                        <img src="../static/assets/icons/weather/64x64/day/113.png" alt="{{ city.temps }}" class="weather_image">
+                    {% for forecast in forecasts %}
+
+                        <article class="weather_historic_item">
+                            
+                            <img src="../static/assets/icons/weather/64x64/day/113.png" alt="soleil" class="weather_image">
+                            <h3 class="weather_day">{{ forecast['date'] }}</h3>
+                            <h2 class="weather_day">{{ forecast['time'] }}</h2>
+                        
+                            <p class="weather_temp">
+                                <span class="value">{{ forecast['temperature'] }}</span>&deg;C</p>
+                        </article>
+                        
+                    {% endfor %}
+                    
+                        
                        
-                        <p class="weather_temp">
-                            <span class="value">{{ city.temperature }}</span>&deg;C</p>
-                    </article>
-                {% endfor %}
+                    
                     </div>  
                 
                           

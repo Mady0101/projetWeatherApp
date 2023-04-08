@@ -30,6 +30,10 @@
                     <button class="button-lien" ><a href="{{ url_for('home_blueprint.historic') }}" style="text-decoration: none !important;" >Historic</a></button>
                        
                      </div></li>
+                     <li>
+                        <button  class="button-lien"> <a href="{{url_for('home_blueprint.previsions')}}" style="text-decoration: none !important;" > Prevision</a></button>
+                
+                     </li>
                      <li>   {% if user %}
                     <div style="display : flex ">
                         <i class="icon-user" style="height:25px ; margin-right:20px"></i>
@@ -43,7 +47,7 @@
                 {% endif %}
                  </li>
                  <li>
-                    <button class="button-lien" ><a href="{{ url_for('home_blueprint.historic') }}" style="text-decoration: none !important;" >Map</a></button>
+                    <button class="button-lien" ><a href="{{ url_for('home_blueprint.map') }}" style="text-decoration: none !important;" >Map</a></button>
                        
                      
                 </ul>
