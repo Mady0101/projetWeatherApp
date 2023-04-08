@@ -28,8 +28,18 @@ def home():
         if capitale:
             ville_id = capitale["_id"]
         else:
-            print("Capitale introuvable dans la base de données")
-            db.choix.insert_one({ 'capitale': ville_nom, 'traite': 0})
+            weather_data = City(None,
+                            geol['ville'],
+                            geol['temps'] ,
+                            geol['vent'] ,
+                            "hj",
+                            geol['temperature'],
+                            geol['humidite'] ,
+                            geol['pression_atmospherique'])
+            return render_template("index.html", cities=cities, city=weather_data, message="La ville entrée n'est pas dans la base de données.")
+
+        db.choix.insert_one({'capitale_id': ville_id, 'capitale': ville_nom, 'traite': 0})
+            
  
         
         time.sleep(4)
@@ -40,7 +50,6 @@ def home():
                             weather_data_db['ville'],
                             weather_data_db['temps'] ,
                             weather_data_db['vent'] ,
-                            "date",
                             weather_data_db['temperature'],
                             weather_data_db['humidite'] ,
                             weather_data_db['pression_atmospherique'])
