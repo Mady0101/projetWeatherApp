@@ -8,7 +8,7 @@
   <body>
     <div id="map" style="height: 500px;"></div>
     <script>
-      var map = L.map('map').setView([36.862499, 10.195556], 13);
+      var map = L.map('map').setView(["{{location['lat']}}", "{{location['lon']}}"], 13);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap contributors'
       }).addTo(map);
@@ -18,17 +18,8 @@
             layer: 'temp_new',
             API_key: '52082668a5218930e731090e3ab37945',
         }).addTo(map);
-      cities= {{data['cities']|tojson}};
       
-      markers = []
-      cities.map((city) => {
-        markers.push([city.lat,city.lon])
-      })
-      console.log("markers" , markers)
-      markers.map((cord) =>{
-        L.marker(cord).addTo(map)
-      })
-      var marker = L.marker([51.5, -0.09]).addTo(map);
+      var marker = L.marker(["{{location['lat']}}", "{{location['lon']}}"]).addTo(map);
       marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
     </script>
   </body>
