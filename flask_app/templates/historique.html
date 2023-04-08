@@ -42,12 +42,14 @@
                  <li>
                     
                     <div class="search-bar"> 
-                    <form id="locationInput">
-                        <input type="text" class="search" placeholder="Search location ..."/>
-                        <button type="submit" class="submit">Rechercher 
-                            
-                        </button>
-                    </form>
+
+                        <form id="locationInput" method="POST" action="{{ url_for('home_blueprint.historic') }}">
+                            <input type="text" class="search" name="city" placeholder="Search location ..."/>
+                            <button type="submit" class="submit">Search 
+                                
+                            </button>
+                        </form>
+
                     </div>     
                       
                  </li>
@@ -58,39 +60,15 @@
           
                 
                 <div class="weather_historic">
-                    
-                        <article class="weather_historic_item">
-                           
-                            <img src="../static/assets/icons/weather/64x64/day/113.png" alt="soleil" class="weather_image">
-                            <h3 class="weather_day">Day </h3>
-                             
-                            <p class="weather_temp">
-                                <span class="value">+25</span>&deg;C</p>
-                        </article>
-                        <article class="weather_historic_item">
-                            <img src="../static/assets/icons/weather/64x64/day/113.png" alt="soleil" class="weather_image">
-                            <h3 class="weather_day">Day </h3>
-                            <p class="weather_temp">
-                                <span class="value">+25</span>&deg;C</p>
-                        </article>
-                        <article class="weather_historic_item">
-                            <img src="../static/assets/icons/weather/64x64/day/113.png" alt="soleil" class="weather_image">
-                            <h3 class="weather_day">Day </h3>
-                            <p class="weather_temp">
-                                <span class="value">+25</span>&deg;C</p>
-                        </article>
-                        <article class="weather_historic_item">
-                            <img src="../static/assets/icons/weather/64x64/day/113.png" alt="soleil" class="weather_image">
-                            <h3 class="weather_day">Day </h3>
-                            <p class="weather_temp">
-                                <span class="value">+25</span>&deg;C</p>
-                        </article>
-                        <article class="weather_historic_item">
-                            <img src="../static/assets/icons/weather/64x64/day/113.png" alt="soleil" class="weather_image">
-                            <h3 class="weather_day">Day </h3>
-                            <p class="weather_temp">
-                                <span class="value">+25</span>&deg;C</p>
-                        </article>
+                    {% for city in cities %}
+                    <article class="weather_historic_item">
+                        <h3 class="weather_day">{{ city.currentTime }} </h3>
+                        <img src="../static/assets/icons/weather/64x64/day/113.png" alt="{{ city.temps }}" class="weather_image">
+                       
+                        <p class="weather_temp">
+                            <span class="value">{{ city.temperature }}</span>&deg;C</p>
+                    </article>
+                {% endfor %}
                     </div>  
                 
                           

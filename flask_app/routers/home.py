@@ -17,11 +17,6 @@ collection = db["capitales"]
 recherche = db["recherche"]
 loc=db["localisation"]
 
-client = MongoClient("mongodb://localhost:27017/")
-db = client["mydatabase"]
-collection = db["capitales"]
-recherche = db["recherche"]
-loc=db["localisation"]
 
 home_blueprint = Blueprint('home_blueprint', __name__)
 
@@ -80,12 +75,13 @@ def home():
                             geol['ville'],
                             geol['temps'] ,
                             geol['vent'] ,
-                            "hj",
+                            "aa",
                             geol['temperature'],
                             geol['humidite'] ,
                             geol['pression_atmospherique'])
     
     return render_template("index.html" ,user=usertest, cities=cities,date =current_date.strftime("%d/%m/%Y") ,time=current_time, city = weather_data)
+
 
 
 
@@ -191,6 +187,24 @@ def favori():
     return render_template('favori.html')
 
 
-@home_blueprint.route('/historic')
+@home_blueprint.route('/historic',methods=['GET','POST'])
 def historic():
-    return render_template('historique.html')
+    city_list = []
+    for i in range(5):
+        city=City(None, None, None, None, None, None, None, None)
+        city_list.append(city)
+    if request.method == 'POST':
+        ville_nom = request.form['city']
+        capitale = collection.find_one({"nom": ville_nom})
+        if capitale:
+            recherche_data = recherche.find({"ville": ville_nom}).sort("date", pymongo.DESCENDING).limit(5)
+            city_list = []
+            for r in recherche_data:
+                city = City(r["_id"], r["ville"], r["temps"], r["vent"], r["date"].strftime('%d/%m/%Y %H:%M'), r["temperature"], r["humidite"], r["pression_atmospherique"])
+                city_list.append(city)
+            return render_template('historique.html',cities=city_list)
+        else:
+            return render_template("historique.html",cities=city_list)
+    return render_template("historique.html",cities=city_list) # Ajout de cette ligne
+
+ 
