@@ -25,7 +25,7 @@ def login():
         
         exist = collection.find_one({"username": username})
         if exist:
-            if not exist.password == password:
+            if not exist['password'] == password:
                 flash('username or password are wrong')
                 return redirect(url_for('.login'))
         if not exist:
@@ -33,8 +33,9 @@ def login():
             return redirect(url_for('.login'))
          
 
-        user = User(exist.id, username=exist.username, password=exist.password,email=exist.email)
-        session['user'] = user.id
+        print(exist['_id'])
+        user = User(exist['_id'], username=exist['username'], password=exist['password'],email=exist['email'] , favorites=exist['favorites'] , historic=exist['historic'])
+        session['user'] = str(user.id)
         return redirect(url_for('home_blueprint.home' , user= user))
 
     return render_template('login.html')
@@ -63,7 +64,7 @@ def signup():
             flash('the two passwords are no the same')
             return redirect(url_for('.signup'))
         
-        collection.insert_one({"username": username, 'password': password, 'email': email})
+        collection.insert_one({"username": username, 'password': password, 'email': email , "favorites":[],"historic":[]})
 
         user = User(id=random.randint(2,100), username=username, password=password, email=email)
         
