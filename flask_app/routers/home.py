@@ -16,12 +16,9 @@ db = client["mydatabase"]
 collection = db["capitales"]
 recherche = db["recherche"]
 loc=db["localisation"]
+fav=db["listeFavoris"]
 
-client = MongoClient("mongodb://localhost:27017/")
-db = client["mydatabase"]
-collection = db["capitales"]
-recherche = db["recherche"]
-loc=db["localisation"]
+
 
 home_blueprint = Blueprint('home_blueprint', __name__)
 
@@ -61,8 +58,10 @@ def home():
                             weather_data_db['temperature'],
                             weather_data_db['humidite'] ,
                             weather_data_db['pression_atmospherique'])
+        
         return render_template('index.html',cities=cities, city=weather_data)
         #return render_template("resultat.html", ville=ville_nom)
+    
     
 
     # user = request.args['user']
@@ -73,7 +72,6 @@ def home():
     city = City(1,"ariana","cloudy",15,"13:05",15,12,12)
     
     return render_template("index.html" ,user=usertest, cities=cities,date =current_date.strftime("%d/%m/%Y") , city = City(1,"ariana","cloudy",15,"13:05",15,12,12))
-
 
 
 @home_blueprint.route('/map')
@@ -136,3 +134,39 @@ def favori():
 @home_blueprint.route('/historic')
 def historic():
     return render_template('historique.html')
+
+@home_blueprint.route('/insertion', methods=['POST'])
+def insertion():
+
+    print('hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii')
+    weather_data_db = recherche.find_one(sort=[('date', -1)])
+    print(weather_data_db)
+    # weather_data = City(None,
+    #                         weather_data_db['ville'],
+    #                         weather_data_db['temps'] ,
+    #                         weather_data_db['vent'] ,
+    #                         weather_data_db['temperature'],
+    #                         weather_data_db['humidite'] ,
+    #                         weather_data_db['pression_atmospherique'])
+        
+    weather_data = City(None, 'ville', 'temps', 'vent', 'temperature', 'humidite', 'pression_atmospherique')
+
+    cityname=weather_data['name']
+    print("Cithyhyyyyyyyyyyyyyy",cityname)
+    print("CCCCCity",City['name'])
+    
+    # Récupérez les données postées dans le formulaire
+    ville = request.form.get('ville')
+    temps = request.form.get('temps')
+    vent = request.form.get('vent')
+    temperature = request.form.get('temperature')
+    humidite = request.form.get('humidite')
+    pression_atmospherique = request.form.get('pression_atmospherique')
+
+    # Instanciez la classe City avec les données
+    weather_data = City(None, ville, temps, vent, temperature, humidite, pression_atmospherique)
+
+    # Passez les données au modèle index.html pour le rendu
+    return render_template('favori.html',city=weather_data)
+
+
