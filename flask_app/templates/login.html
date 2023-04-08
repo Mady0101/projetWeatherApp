@@ -17,7 +17,7 @@
       <div class="container">
         <div class="columns is-centered">
           <div class="column is-half">
-            <form method="POST">
+            <form method="POST" action="{{ url_for('authentication_blueprint.login') }}">
               <div class="field">
                 {% with messages = get_flashed_messages() %}
                   {% if messages %}
