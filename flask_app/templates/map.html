@@ -20,7 +20,13 @@
         }).addTo(map);
       
       var marker = L.marker(["{{location['lat']}}", "{{location['lon']}}"]).addTo(map);
-      marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+      marker.bindPopup("<b>"+ "{{city['name']}}" +"</b>"+
+      "<br>"+
+      "<b> temperature </b> " + "{{city['temperature']}}"+ "<br>"
+      +"<b> weather </b> "+"city.temps" + "<br>"
+      +"<b> atmosphere </b> "+"{{city['atmosphericPressure']}}" + "<br>"
+      +"<b> humidity </b> "+"{{city['humidity']}}" + "<br>"
+      +"<b> wind </b> "+"{{city['wind']}}" + "<br>").openPopup();
     </script>
   </body>
 </html>

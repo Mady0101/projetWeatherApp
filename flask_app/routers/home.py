@@ -92,8 +92,8 @@ def map():
                             15 ,
                             12,
                             18 ,
-                            56)
-    cityname=weather_data['name']
+                            56 , 15)
+    cityname=weather_data.name
     
     url = f"https://nominatim.openstreetmap.org/search?q=Ariana%2C%20{cityname}&format=json"
     response = requests.get(url)

@@ -21,6 +21,12 @@ h1,h3{
     font-weight: 400;
 }
 
+.login{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .weather-app{
     min-height: 100vh;
     background-position: center;
