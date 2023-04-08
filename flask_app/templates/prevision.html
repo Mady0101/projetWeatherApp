@@ -15,7 +15,7 @@
 <body>
    
     <div class="weather-app">
-            <h1 class="brand">Historic </h1>
+            <h1 class="brand">Previsions</h1>
             <div class="weather-app-container">
             <nav >
                 <ul class="menu">
@@ -62,35 +62,14 @@
                         <article class="weather_historic_item">
                            
                             <img src="../static/assets/icons/weather/64x64/day/113.png" alt="soleil" class="weather_image">
-                            <h3 class="weather_day">Day </h3>
-                             
+                            <h3 class="weather_day">{{ forecast['date'] }}</h3>
+                            <h2 class="weather_day">{{ forecast['time'] }}</h2>
+                        
                             <p class="weather_temp">
-                                <span class="value">+25</span>&deg;C</p>
+                                <span class="value">{{ forecast['temperature'] }}</span>&deg;C</p>
                         </article>
-                        <article class="weather_historic_item">
-                            <img src="../static/assets/icons/weather/64x64/day/113.png" alt="soleil" class="weather_image">
-                            <h3 class="weather_day">Day </h3>
-                            <p class="weather_temp">
-                                <span class="value">+25</span>&deg;C</p>
-                        </article>
-                        <article class="weather_historic_item">
-                            <img src="../static/assets/icons/weather/64x64/day/113.png" alt="soleil" class="weather_image">
-                            <h3 class="weather_day">Day </h3>
-                            <p class="weather_temp">
-                                <span class="value">+25</span>&deg;C</p>
-                        </article>
-                        <article class="weather_historic_item">
-                            <img src="../static/assets/icons/weather/64x64/day/113.png" alt="soleil" class="weather_image">
-                            <h3 class="weather_day">Day </h3>
-                            <p class="weather_temp">
-                                <span class="value">+25</span>&deg;C</p>
-                        </article>
-                        <article class="weather_historic_item">
-                            <img src="../static/assets/icons/weather/64x64/day/113.png" alt="soleil" class="weather_image">
-                            <h3 class="weather_day">Day </h3>
-                            <p class="weather_temp">
-                                <span class="value">+25</span>&deg;C</p>
-                        </article>
+                       
+                    
                     </div>  
                 
                           

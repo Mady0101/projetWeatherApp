@@ -24,14 +24,7 @@
 <body>
     <div class="weather-app">
         <div class="container">
-          <form id="locationInput" class="d">
-            <input type="text" class="search" placeholder="Search location ..."/>
-            <button type="submit" class="submit">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"  class="bi bi-search" >
-                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                </svg>
-          </button>
-        </form>
+          <h1 class="titre">Favorites cities</h1>
             <table class="tableau">
                 <tr>
                   <th></th>
@@ -39,28 +32,28 @@
                 </tr>
                 <tr>
                   <td>New York</td>
-                  <td><button><img src="../static/assets/images/backgrounds/poub.png" class="im"></button></td>
-                  <td><button onclick="ajouterDetails()"><img src="../static/assets/images/backgrounds/plus.png" class="imp"></button></td>
+                  <td><button onclick="ajouterDetails()"><img src="../static/assets/images/backgrounds/info.png" class="imp"></button></td>
+                  <td><button onclick="deleteRow(this)"><img src="../static/assets/images/backgrounds/poub.png" class="im"></button></td>
                 </tr>
                 <tr>
-                    <td>New York</td>
-                    <td><button><img src="../static/assets/images/backgrounds/poub.png" class="im"></button></td>
-                    <td><button onclick="ajouterDetails()"><img src="../static/assets/images/backgrounds/plus.png" class="imp"></button></td>
+                    <td>Paris</td>
+                    <td><button onclick="ajouterDetails()"><img src="../static/assets/images/backgrounds/info.png" class="imp"></button></td>
+                    <td><button onclick="deleteRow(this)"><img src="../static/assets/images/backgrounds/poub.png" class="im"></button></td>
                   </tr>
                 <tr>
-                    <td>New York</td>
+                    <td>Beirut</td>
+                    <td><button onclick="ajouterDetails()"><img src="../static/assets/images/backgrounds/info.png" class="imp"></button></td>
                     <td><button><img src="../static/assets/images/backgrounds/poub.png" class="im"></button></td>
-                    <td><button onclick="ajouterDetails()"><img src="../static/assets/images/backgrounds/plus.png" class="imp"></button></td>
                   </tr>
                 <tr>
-                    <td>New York</td>
-                    <td><button><img src="../static/assets/images/backgrounds/poub.png" class="im"></button></td>
-                    <td><button onclick="ajouterDetails()"><img src="../static/assets/images/backgrounds/plus.png" class="imp"></button></td>
+                    <td>Tunis</td>
+                    <td><button onclick="ajouterDetails()"><img src="../static/assets/images/backgrounds/info.png" class="imp"></button></td>
+                    <td><button onclick="deleteRow(this)"><img src="../static/assets/images/backgrounds/poub.png" class="im"></button></td>
                   </tr>
                 <tr>
-                    <td>New York</td>
-                    <td><button><img src="../static/assets/images/backgrounds/poub.png" class="im"></button></td>
-                    <td><button onclick="ajouterDetails()"><img src="../static/assets/images/backgrounds/plus.png" class="imp"></button></td>
+                    <td>London</td>
+                    <td><button onclick="ajouterDetails()"><img src="../static/assets/images/backgrounds/info.png" class="imp"></button></td>
+                    <td><button onclick="deleteRow(this)"><img src="../static/assets/images/backgrounds/poub.png" class="im"></button></td>
                 </tr>
                 
               </table>
@@ -77,14 +70,32 @@
         }
             }
           </script>
+          <script>
+            function deleteRow(btn) {
+              var row = btn.parentNode.parentNode;
+              row.parentNode.removeChild(row);
+            }
+          </script>
 
         <div class="panel" id="maDiv">
             <ul class="details">
                 <h4>Weather Details</h4>
                 <li>
+                  <span>Temperature</span>
+                  <span class="cloud">89%</span>
+              </li>
+                <li>
                     <span>Cloudy</span>
                     <span class="cloud">89%</span>
                 </li>
+                <li>
+                  <span>Sunny</span>
+                  <span class="cloud">89%</span>
+              </li>
+              <li>
+                <span>Pressure</span>
+                <span class="cloud">89%</span>
+            </li>
                 <li>
                     <span>Humidity</span>
                     <span class="humidity">64%</span>

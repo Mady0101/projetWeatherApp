@@ -124,3 +124,53 @@ input.\=image_menu {
    
    
 }
+.menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color:rgba(110,110, 110, 0.25);
+      
+    border-radius: 10px;
+  
+  }
+  
+  .menu li {
+    display: inline-block;
+    border: 10px;
+  }
+  
+  .menu li a {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: white;
+ 
+  }
+  
+  .menu li a:hover {
+    background-color:rgba(110,110, 110, 0.25);
+    
+   
+  }
+  .image-button {
+    width: 20px; /* Largeur de l'image */
+    height: 30px; /* Hauteur de l'image */
+    background-size: cover; /* Ajuste la taille de l'image pour remplir le bouton */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+    border: none; /* Supprime la bordure par défaut du bouton */
+    cursor: pointer; /* Affiche un curseur pointer au survol */
+    outline: none; /* Supprime la bordure de focus du bouton */
+  }
+.weather-app-container{
+    color: #333;
+    text-decoration: none;
+    margin: 10px 20px 15px 30px;
+    
+}
+.button-lien,.image-button{
+    background: transparent;
+    border-radius: 10px;
+}
+.search-bar{
+    margin-left: 270px;
+}
