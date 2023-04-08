@@ -24,24 +24,28 @@
             <nav >
                 <ul class="menu">
                   <li><div class="favori">
-                    <button class="button-lien" ><a href="{{ url_for('home_blueprint.favori') }}" style="">Favorite</a></button>
+                    <button class="button-lien" ><a href="{{ url_for('home_blueprint.favori') }}" style="text-decoration: none !important;">Favorite</a></button>
                     </div></li>
                   <li><div class="historic">
-                    <button class="button-lien" ><a href="{{ url_for('home_blueprint.historic') }}" >Historic</a></button>
+                    <button class="button-lien" ><a href="{{ url_for('home_blueprint.historic') }}" style="text-decoration: none !important;" >Historic</a></button>
                        
                      </div></li>
                      <li>   {% if user %}
                     <div style="display : flex ">
                         <i class="icon-user" style="height:25px ; margin-right:20px"></i>
-                        <span style="padding-bottom: 10px;"><a href="{{ url_for('home_blueprint.profile') }}">Welcome {{user['username']}}</a></span>
+                        <span style="padding-bottom: 10px;"><a href="{{ url_for('home_blueprint.profile') }}" style="text-decoration: none !important;">Welcome {{user['username']}}</a></span>
                     </div>
                     <button> logout </button></li>
                     <li>
                 {% else %}
-                <button class="button-lien"> <a href="{{url_for('authentication_blueprint.login')}}" class="text-decoration: none !important;" > SignIn</a> </button>
-                <button  class="button-lien"> <a href="{{url_for('authentication_blueprint.signup')}}" class="text-decoration: none !important;" > SignUp</a></button>
+                <button class="button-lien"> <a href="{{url_for('authentication_blueprint.login')}}" style="text-decoration: none !important;" > SignIn</a> </button>
+                <button  class="button-lien"> <a href="{{url_for('authentication_blueprint.signup')}}" style="text-decoration: none !important;" > SignUp</a></button>
                 {% endif %}
                  </li>
+                 <li>
+                    <button class="button-lien" ><a href="{{ url_for('home_blueprint.historic') }}" style="text-decoration: none !important;" >Map</a></button>
+                       
+                     
                 </ul>
               </nav>
             

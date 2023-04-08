@@ -9,6 +9,7 @@ from flask_app.models.city import Weather
 import datetime
 import time
 from pymongo import MongoClient
+import requests
 
 client = MongoClient("mongodb://localhost:27017/")
 db = client["mydatabase"]
@@ -72,6 +73,45 @@ def home():
     city = City(1,"ariana","cloudy",15,"13:05",15,12,12)
     
     return render_template("index.html" ,user=usertest, cities=cities,date =current_date.strftime("%d/%m/%Y") , city = City(1,"ariana","cloudy",15,"13:05",15,12,12))
+
+
+
+@home_blueprint.route('/map')
+def map(): 
+    weather_data_db = recherche.find_one(sort=[('date', -1)])
+    # weather_data = City(None,
+    #                         weather_data_db['ville'],
+    #                         weather_data_db['temps'] ,
+    #                         weather_data_db['vent'] ,
+    #                         weather_data_db['temperature'],
+    #                         weather_data_db['humidite'] ,
+    #                         weather_data_db['pression_atmospherique'])
+    weather_data = City(None,
+                            "ariana",
+                            15,
+                            15 ,
+                            12,
+                            18 ,
+                            56)
+    cityname=weather_data['name']
+    
+    url = f"https://nominatim.openstreetmap.org/search?q=Ariana%2C%20{cityname}&format=json"
+    response = requests.get(url)
+    location = {}
+    if response.ok:
+        data = response.json()
+        location = {
+                    "lon":data[0]["lon"],
+                    "lat":data[0]["lat"]
+                    }
+        print(data[0]["lat"], data[0]["lon"])
+    else:
+        print("Request failed with status code", response.status_code)
+
+    
+    
+    return render_template("map.html" , city = weather_data , location=location)
+
 
 @home_blueprint.route('/profile')
 def profile():
