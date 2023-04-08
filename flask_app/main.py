@@ -12,7 +12,6 @@ from flask import (
     url_for,
     Blueprint
 )
-from pymongo import MongoClient
 
 from flask_app.models.user import User
 from flask_app.routers.authentication import authentication_blueprint
@@ -35,11 +34,7 @@ print(app.url_map)
 
 
 
-client = MongoClient("mongodb://localhost:27017/")
-db = client["mydatabase"]
-collection = db["capitales"]
-recherche = db["recherche"]
-loc=db["localisation"]
+
 
 
 @app.route('/historique')
