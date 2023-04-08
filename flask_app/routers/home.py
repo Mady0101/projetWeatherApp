@@ -5,7 +5,7 @@ from flask_app.models.user import User
 
 from flask_app.models.city import City
 from flask_app.models.city import Weather
-
+import pymongo
 import datetime
 import time
 from pymongo import MongoClient
@@ -27,6 +27,8 @@ home_blueprint = Blueprint('home_blueprint', __name__)
 
 @home_blueprint.route('/',methods=['GET','POST'])
 def home():
+    current_date = datetime.date.today()
+    current_time = datetime.datetime.now().time()
     cities = db.capitales.find()
     print(cities)
     geol = loc.find_one()
@@ -57,22 +59,33 @@ def home():
         weather_data = City(None,
                             weather_data_db['ville'],
                             weather_data_db['temps'] ,
-                            weather_data_db['vent'] ,
+                            weather_data_db['vent'],
+                            "time",
                             weather_data_db['temperature'],
                             weather_data_db['humidite'] ,
-                            weather_data_db['pression_atmospherique'])
-        return render_template('index.html',cities=cities, city=weather_data)
+                            weather_data_db['pression_atmospherique']
+                             )
+        return render_template('index.html',cities=cities, date =current_date.strftime("%d/%m/%Y") ,time=current_time,city=weather_data)
         #return render_template("resultat.html", ville=ville_nom)
     
 
     # user = request.args['user']
     
-    current_date = datetime.date.today()
+
     usertest = User(15,"mahdi","aze","aze@mail.com")
     usertest = None
     city = City(1,"ariana","cloudy",15,"13:05",15,12,12)
+    geol = loc.find_one(sort=[("_id", pymongo.DESCENDING)])
+    weather_data = City(None,
+                            geol['ville'],
+                            geol['temps'] ,
+                            geol['vent'] ,
+                            "hj",
+                            geol['temperature'],
+                            geol['humidite'] ,
+                            geol['pression_atmospherique'])
     
-    return render_template("index.html" ,user=usertest, cities=cities,date =current_date.strftime("%d/%m/%Y") , city = City(1,"ariana","cloudy",15,"13:05",15,12,12))
+    return render_template("index.html" ,user=usertest, cities=cities,date =current_date.strftime("%d/%m/%Y") ,time=current_time, city = weather_data)
 
 
 
