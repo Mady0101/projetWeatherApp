@@ -5,6 +5,7 @@ from flask_app.models.user import User
 
 from flask_app.models.city import City
 from flask_app.models.city import Weather
+
 import datetime
 import time
 from pymongo import MongoClient
@@ -15,11 +16,18 @@ collection = db["capitales"]
 recherche = db["recherche"]
 loc=db["localisation"]
 
+client = MongoClient("mongodb://localhost:27017/")
+db = client["mydatabase"]
+collection = db["capitales"]
+recherche = db["recherche"]
+loc=db["localisation"]
+
 home_blueprint = Blueprint('home_blueprint', __name__)
 
-@home_blueprint.route('/')
+@home_blueprint.route('/',methods=['GET','POST'])
 def home():
     cities = db.capitales.find()
+    print(cities)
     geol = loc.find_one()
     if request.method == 'POST':
         ville_nom = request.form['city']
@@ -27,19 +35,31 @@ def home():
         if capitale:
             ville_id = capitale["_id"]
         else:
-            print("Capitale introuvable dans la base de données")
- 
+            weather_data = City(None,
+                            geol['ville'],
+                            geol['temps'] ,
+                            geol['vent'] ,
+                            "hj",
+                            geol['temperature'],
+                            geol['humidite'] ,
+                            geol['pression_atmospherique'])
+            return render_template("index.html", cities=cities, city=weather_data, message="La ville entrée n'est pas dans la base de données.")
+
         db.choix.insert_one({'capitale_id': ville_id, 'capitale': ville_nom, 'traite': 0})
+            
+ 
+        
         time.sleep(4)
         weather_data_db = recherche.find_one(sort=[('date', -1)])
+        print(weather_data_db)
+        
         weather_data = City(None,
-                            weather_data_db.ville,
-                            weather_data_db.temps ,
-                            weather_data_db.vent ,
-                            "date",
-                            weather_data_db.temperature,
-                            weather_data_db.humidite ,
-                            weather_data_db.pression_atmospherique)
+                            weather_data_db['ville'],
+                            weather_data_db['temps'] ,
+                            weather_data_db['vent'] ,
+                            weather_data_db['temperature'],
+                            weather_data_db['humidite'] ,
+                            weather_data_db['pression_atmospherique'])
         return render_template('index.html',cities=cities, city=weather_data)
         #return render_template("resultat.html", ville=ville_nom)
     
@@ -51,7 +71,7 @@ def home():
     usertest = None
     city = City(1,"ariana","cloudy",15,"13:05",15,12,12)
     
-    return render_template("index.html" ,user=usertest, cities=[],date =current_date.strftime("%d/%m/%Y") , city = City(1,"ariana","cloudy",15,"13:05",15,12,12))
+    return render_template("index.html" ,user=usertest, cities=cities,date =current_date.strftime("%d/%m/%Y") , city = City(1,"ariana","cloudy",15,"13:05",15,12,12))
 
 @home_blueprint.route('/profile')
 def profile():
