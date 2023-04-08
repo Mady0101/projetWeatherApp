@@ -16,21 +16,46 @@
    
     <div class="weather-app">
             <h1 class="brand">Historic </h1>
-            <div class="panel">
-                <form id="locationInput">
-                    <input type="image" src="../static/assets/icons/menu.png" alt="Description de l'image" class="=image_menu">
-    
-                    </button>
-                </form>
-              </div>
-                <div class="search_form">
+            <div class="weather-app-container">
+            <nav >
+                <ul class="menu">
+                    <li><div class="historic">
+                        <button class="button-lien" ><a href="{{ url_for('home_blueprint.home') }}" >Home</a></button>
+                           
+                         </div></li>
+                  <li><div class="favori">
+                    <button class="button-lien" ><a href="{{ url_for('home_blueprint.favori') }}" style="">Favorite</a></button>
+                    </div></li>
+
+                     <li>   {% if user %}
+                    <div style="display : flex ">
+                        <i class="icon-user" style="height:25px ; margin-right:20px"></i>
+                        <span style="padding-bottom: 10px;"><a href="{{ url_for('home_blueprint.profile') }}">Welcome {{user['username']}}</a></span>
+                    </div>
+                    <button> logout </button></li>
+                    <li>
+                {% else %}
+                    <button class="button-lien"> <a href="{{url_for('authentication_blueprint.login')}}" class="text-decoration: none !important;" > SignIn</a> </button>
+                    <button  class="button-lien"> <a href="{{url_for('authentication_blueprint.signup')}}" class="text-decoration: none !important;" > SignUp</a></button>
+                {% endif %}
+                 </li>
+                 <li>
+                    
+                    <div class="search-bar"> 
                     <form id="locationInput">
                         <input type="text" class="search" placeholder="Search location ..."/>
                         <button type="submit" class="submit">Rechercher 
                             
                         </button>
                     </form>
-                </div>
+                    </div>     
+                      
+                 </li>
+                </ul>
+              
+              </nav>
+              
+          
                 
                 <div class="weather_historic">
                     
