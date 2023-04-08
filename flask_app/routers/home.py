@@ -127,6 +127,8 @@ def profile():
 
     return render_template('profile.html', user=user)
 
+
+
 @home_blueprint.route('/prevision')
 def previsions():
     city = request.args.get('city')
@@ -140,13 +142,13 @@ def previsions():
     forecasts = []
 
     # Définir une variable pour aujourd'hui, à minuit
-    today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+    today = datetime.datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
 
     # Parcourir toutes les données de la réponse de l'API
     for data in response['list']:
 
         # Convertir la date et l'heure en objet datetime
-        date_time = datetime.strptime(data['dt_txt'], '%Y-%m-%d %H:%M:%S')
+        date_time = datetime.datetime.strptime(data['dt_txt'], '%Y-%m-%d %H:%M:%S')
 
         # Calculer la différence en jours entre la date actuelle et la date des données
         days_difference = (date_time - today).days
@@ -168,12 +170,14 @@ def previsions():
                 'temperature': temperature
             })
 
-    return render_template('previson.html', forecasts=forecasts)
+    return render_template('prevision.html', forecasts=forecasts)
 
 
 @home_blueprint.route('/favori')
 def favori():
     return render_template('favori.html')
+
+
 @home_blueprint.route('/historic')
 def historic():
     return render_template('historique.html')

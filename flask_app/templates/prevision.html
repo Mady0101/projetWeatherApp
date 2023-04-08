@@ -58,9 +58,10 @@
           
                 
                 <div class="weather_historic">
-                    
+                    {% for forecast in forecasts %}
+
                         <article class="weather_historic_item">
-                           
+                            
                             <img src="../static/assets/icons/weather/64x64/day/113.png" alt="soleil" class="weather_image">
                             <h3 class="weather_day">{{ forecast['date'] }}</h3>
                             <h2 class="weather_day">{{ forecast['time'] }}</h2>
@@ -68,6 +69,10 @@
                             <p class="weather_temp">
                                 <span class="value">{{ forecast['temperature'] }}</span>&deg;C</p>
                         </article>
+                        
+                    {% endfor %}
+                    
+                        
                        
                     
                     </div>  
